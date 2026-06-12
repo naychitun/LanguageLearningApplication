@@ -1,0 +1,487 @@
+/* 基本設定 */
+:root {
+  --bg-light: #f5f5f7;
+  --bg-dark: #111217;
+  --card-light: #ffffff;
+  --card-dark: #1d1f27;
+  --text-light: #111217;
+  --text-dark: #f5f5f7;
+  --accent: #4f7cff;
+  --accent-soft: rgba(79, 124, 255, 0.15);
+  --border-soft: rgba(0, 0, 0, 0.08);
+  --radius: 16px;
+  --transition: 0.25s ease;
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.12);
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+/* 全体設定 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* 画面 */
+body {
+  font-family: var(--font-main);
+  background: var(--bg-light);
+  color: var(--text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+/* ダークモード */
+body.dark {
+  background: radial-gradient(circle at top, #25273a, #05060a);
+  color: var(--text-dark);
+}
+/* アプリ本体 */
+.app {
+  width: 420px;
+  max-width: 100%;
+  background: var(--bg-light);
+  border-radius: 32px;
+  padding: 20px 20px 24px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+  transition: background var(--transition), color var(--transition), border var(--transition);
+}
+
+body.dark .app {
+  background: #151623;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+/* ヘッダー */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.app-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* レベル表示 */
+.level-info {
+  text-align: right;
+  font-size: 12px;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tabs */
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 4px;
+  border-radius: 999px;
+}
+
+body.dark .tabs {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+  color: inherit;
+  transition: background var(--transition), color var(--transition), transform 0.1s ease;
+}
+
+.tab-button.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  transform: translateY(-1px);
+}
+
+/* Content */
+
+.tab-contents {
+  margin-top: 4px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: var(--card-light);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-soft);
+  transition: background var(--transition), border var(--transition), transform 0.1s ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+}
+
+body.dark .card {
+  background: var(--card-dark);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.card .label {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.card .value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Word list */
+
+.word-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.word-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-light);
+  border-radius: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-soft);
+  font-size: 13px;
+}
+
+body.dark .word-item {
+  background: var(--card-dark);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.word-item .jp {
+  font-weight: 600;
+}
+
+.word-item .en {
+  opacity: 0.8;
+}
+
+/* Quiz */
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.quiz-question {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.quiz-option {
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  padding: 8px 10px;
+  background: var(--card-light);
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  transition: background var(--transition), border var(--transition), transform 0.1s ease;
+}
+
+.quiz-option:hover {
+  transform: translateY(-1px);
+}
+
+body.dark .quiz-option {
+  background: var(--card-dark);
+  border-color: rgba(255, 255, 255, 0.06);
+   color: var(--text-dark);
+}
+body.dark .quiz-question,
+body.dark .quiz-header,
+body.dark #quiz-progress,
+body.dark #quiz-score {
+  color: var(--text-dark);
+}
+
+/* 正解 */
+.quiz-option.correct {
+  border-color: #3ccf7c;
+  background: rgba(60, 207, 124, 0.12);
+}
+
+/* 不正解 */
+.quiz-option.wrong {
+  border-color: #ff5c7a;
+  background: rgba(255, 92, 122, 0.12);
+}
+
+/* ボタン */
+.primary-btn {
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity var(--transition), transform 0.1s ease;
+}
+
+.primary-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.primary-btn:not(:disabled):hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* Stats chart (ダミー) */
+
+.fake-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 120px;
+  margin: 12px 0;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: var(--card-light);
+  border: 1px solid var(--border-soft);
+}
+
+body.dark .fake-chart {
+  background: var(--card-dark);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.fake-chart .bar {
+  flex: 1;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.fake-chart .bar::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 60%;
+  background: var(--accent);
+}
+
+.chart-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.hidden{
+    display:none;
+}
+
+/* Settings */
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.setting-detail {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* アプリ情報 */
+.app-info {
+  align-items: flex-start;
+}
+
+.app-info .setting-detail {
+  text-align: right;
+  line-height: 1.5;
+  font-size: 12px;
+}
+
+/* Switch */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  margin: 0 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 999px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+/* レッスン */
+.lesson-card{
+  background:#6c63ff;
+  color:white;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:10px;
+  cursor:pointer;
+  font-weight:bold;
+  text-align:center;
+}
+
+.lesson-card:hover{
+  opacity:0.9;
+}
+
+.lesson-words{
+  margin-bottom:15px;
+}
+
+.hidden{
+  display:none;
+}
+
+/* ダークモード用 正解 */
+body.dark .quiz-option.correct {
+  background: #1f4d34;
+  border-color: #4ade80;
+  color: #dcfce7;
+}
+
+/* ダークモード用 不正解 */
+body.dark .quiz-option.wrong {
+  background: #5b1d2a;
+  border-color: #fb7185;
+  color: #ffe4e6;
+}
+body.dark .quiz-option.correct:hover {
+  background: #276749;
+}
+
+body.dark .quiz-option.wrong:hover {
+  background: #7f1d1d;
+}
+
+/* =========================
+   スマホ対応
+========================= */
+
+@media (max-width: 768px) {
+
+  .app {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    padding: 15px;
+  }
+
+  .tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .tab-button {
+    min-width: 80px;
+    font-size: 12px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-option {
+    min-height: 50px;
+    font-size: 16px;
+  }
+
+  .primary-btn {
+    min-height: 50px;
+    font-size: 16px;
+  }
+
+  .lesson-card {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .word-item {
+    font-size: 14px;
+  }
+}

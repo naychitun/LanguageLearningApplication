@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--
+  Language Learning App
+  Created by NAY CHI TUN
+  Year: 2026
+-->
+<html lang="ja">
+<head>
+   <!-- =======================
+       基本設定
+    ======================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Learning App</title>
+   <!-- CSS -->
+  <link rel="stylesheet" href="./style.css" />
+  <!-- ファビコン -->
+  <link rel="icon" href="favicon.ico">
+
+   
+</head>
+
+<body class="light">
+
+  <!-- =======================
+       アプリ全体
+  ======================== -->
+
+  <div class="app">
+
+    <!-- =======================
+         ヘッダー
+    ======================== -->
+
+    <header class="app-header">
+
+      <h1>Language Learning App</h1>
+
+       <!-- レベル表示 -->
+      <div class="level-info">
+        <span id="currentLevel"></span>
+        <span id="nextLevel"></span>
+      </div>
+
+      
+    </header>
+    <!-- =======================
+         ナビゲーションタブ
+    ======================== -->
+    <nav class="tabs">
+
+      <button class="tab-button active" data-tab="dashboard">
+        ダッシュボード
+      </button>
+
+      <button class="tab-button" data-tab="vocab">
+        単語
+      </button>
+       <button class="tab-button" data-tab="favorites">
+  ⭐お気に入り
+</button>
+
+      <button class="tab-button" data-tab="quiz">
+        クイズ
+      </button>
+
+      <button
+        class="tab-button hidden"
+        id="stats-tab"
+        data-tab="stats"
+      >
+        統計
+      </button>
+
+      <button class="tab-button" data-tab="settings">
+        設定
+      </button>
+      
+    </nav>
+    
+    <!-- =======================
+         メインコンテンツ
+    ======================== -->
+    <main class="tab-contents">
+
+      <!-- =======================
+           ダッシュボード
+      ======================== -->
+      <section id="dashboard" class="tab-content active">
+
+        <h2>今日の学習</h2>
+
+        <div class="cards">
+
+          <div class="card">
+            <p class="label">単語数</p>
+            <p class="value" id="vocab-count">未学習</p>
+          </div>
+
+          <div class="card">
+            <p class="label">学習時間</p>
+            <p class="value" id="study-time">0分</p>
+          </div>
+
+          <div class="card">
+            <p class="label">クイズ正解率</p>
+            <p class="value" id="quiz-accuracy">--%</p>
+          </div>
+
+          <div class="card">
+            <p class="label">連続学習日数</p>
+            <p class="value" id="streak">0日</p>
+          </div>
+
+        </div>
+
+        <section id="recentWordsSection">
+
+          <h3 id="recent-title">最近の単語</h3>
+
+          <ul class="word-list" id="recent-words"></ul>
+
+        </section>
+
+      </section>
+
+      <!-- =======================
+           単語一覧
+      ======================== -->
+      <section id="vocab" class="tab-content">
+
+        <h2>単語リスト</h2>
+
+        <ul class="word-list"
+          id="vocab-list"
+        ></ul>
+
+      </section>
+       <!-- =======================
+           お気に入り
+      ======================== -->
+      <section id="favorites" class="tab-content">
+
+  <h2>⭐ お気に入りリスト</h2>
+
+  <ul
+    class="word-list"
+    id="favorite-list"
+  ></ul>
+
+</section>
+
+     <!-- =======================
+           クイズ
+      ======================== -->
+      <section id="quiz" class="tab-content">
+
+        <h2>クイズ</h2>
+
+        <div class="quiz-header">
+
+          <span id="quiz-progress">
+            問題 1/10
+          </span>
+
+          <span id="quiz-score">
+            スコア 0
+          </span>
+
+        </div>
+
+        <p
+          class="quiz-question"
+          id="quiz-question"
+        >
+          「水」は英語で？
+        </p>
+
+        <div
+          class="quiz-options"
+          id="quiz-options"
+        ></div>
+        <div id="answer-message"></div>
+
+        <button
+          id="next-question"
+          class="primary-btn"
+          disabled
+        >
+          次の問題へ
+        </button>
+
+      </section>
+
+      <!-- =======================
+           学習統計
+      ======================== -->
+      <section
+        id="stats"
+        class="tab-content hidden"
+      >
+
+        <h2>学習統計</h2>
+
+        <div class="cards">
+
+          <div class="card">
+            <p class="label">学習時間</p>
+            <p class="value" id="stats-time">
+              --
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="label">クイズ正解率</p>
+            <p class="value" id="stats-accuracy">
+              --%
+            </p>
+          </div>
+
+        </div>
+
+        <div
+          class="fake-chart"
+          id="chart-area"
+        ></div>
+
+      </section>
+
+        <!-- =======================
+   設定
+======================== -->
+<section id="settings" class="tab-content">
+
+  <h2>設定</h2>
+
+  <div class="setting-item">
+
+    <span>表示設定</span>
+
+    <!-- ✔ 修正：label追加 -->
+    <label class="switch" for="theme-toggle">
+      <input
+        type="checkbox"
+        id="theme-toggle"
+        aria-label="ダークモード切り替え"
+      />
+      <span class="slider"></span>
+    </label>
+
+    <span id="theme-label">
+      ライトモード
+    </span>
+
+  </div>
+
+  <div class="setting-item">
+
+    <span>リマインダー</span>
+
+    <div class="setting-detail">
+      毎日
+      <strong>20:00</strong>
+    </div>
+
+  </div>
+
+  <div class="setting-item">
+
+    <span>発音の速度</span>
+
+    <!-- ✔ 修正：label追加 -->
+    <label for="speech-speed">発音の速度</label>
+
+    <input
+      id="speech-speed"
+      type="range"
+      min="0.5"
+      max="1.5"
+      step="0.1"
+      value="1"
+      aria-label="発音速度スライダー"
+    />
+
+  </div>
+
+  <div class="setting-item app-info">
+
+    <span>アプリ情報</span>
+
+    <div class="setting-detail">
+      Language Learning App<br>
+      Version 1.0.0<br>
+      © 2026 NAY CHI TUN
+    </div>
+
+  </div>
+
+</section>
+    </main>
+
+  </div>
+<!-- JavaScript -->
+  <script src="./main.js"></script>
+
+</body>
+</html>
